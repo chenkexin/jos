@@ -5,7 +5,7 @@
 #include <inc/stdio.h>
 #include <inc/stdarg.h>
 
-
+//print in kern/print.c is calling printfmt in lib/
 static void
 putch(int ch, int *cnt)
 {
