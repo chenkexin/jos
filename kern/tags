@@ -1,0 +1,155 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ALLOC_ZERO	pmap.h	50;"	e	enum:__anon2
+ALT	console.c	218;"	d	file:
+C	console.c	285;"	d	file:
+CAPSLOCK	console.c	220;"	d	file:
+CGA_BASE	console.h	13;"	d
+CGA_BUF	console.h	14;"	d
+CHECKSUM	entry.S	22;"	d
+COM1	console.c	26;"	d	file:
+COM_DLL	console.c	30;"	d	file:
+COM_DLM	console.c	31;"	d	file:
+COM_FCR	console.c	35;"	d	file:
+COM_IER	console.c	32;"	d	file:
+COM_IER_RDI	console.c	33;"	d	file:
+COM_IIR	console.c	34;"	d	file:
+COM_LCR	console.c	36;"	d	file:
+COM_LCR_DLAB	console.c	37;"	d	file:
+COM_LCR_WLEN8	console.c	38;"	d	file:
+COM_LSR	console.c	43;"	d	file:
+COM_LSR_DATA	console.c	44;"	d	file:
+COM_LSR_TSRE	console.c	46;"	d	file:
+COM_LSR_TXRDY	console.c	45;"	d	file:
+COM_MCR	console.c	39;"	d	file:
+COM_MCR_DTR	console.c	41;"	d	file:
+COM_MCR_OUT2	console.c	42;"	d	file:
+COM_MCR_RTS	console.c	40;"	d	file:
+COM_RX	console.c	28;"	d	file:
+COM_TX	console.c	29;"	d	file:
+CONSBUFSIZE	console.c	381;"	d	file:
+CRT_COLS	console.h	17;"	d
+CRT_ROWS	console.h	16;"	d
+CRT_SIZE	console.h	18;"	d
+CTL	console.c	217;"	d	file:
+E0ESC	console.c	224;"	d	file:
+Eipdebuginfo	kdebug.h	7;"	s
+IO_RTC	kclock.h	9;"	d
+JOS_KERN_KCLOCK_H	kclock.h	4;"	d
+JOS_KERN_KDEBUG_H	kdebug.h	2;"	d
+JOS_KERN_MONITOR_H	monitor.h	2;"	d
+JOS_KERN_PMAP_H	pmap.h	4;"	d
+KADDR	pmap.h	37;"	d
+MC_NVRAM_SIZE	kclock.h	12;"	d
+MC_NVRAM_START	kclock.h	11;"	d
+MONO_BASE	console.h	11;"	d
+MONO_BUF	console.h	12;"	d
+MULTIBOOT_HEADER_FLAGS	entry.S	21;"	d
+MULTIBOOT_HEADER_MAGIC	entry.S	20;"	d
+NO	console.c	214;"	d	file:
+NUMLOCK	console.c	221;"	d	file:
+NVRAM_BASEHI	kclock.h	16;"	d
+NVRAM_BASELO	kclock.h	15;"	d
+NVRAM_CENTURY	kclock.h	27;"	d
+NVRAM_EXTHI	kclock.h	20;"	d
+NVRAM_EXTLO	kclock.h	19;"	d
+NVRAM_PEXTHI	kclock.h	24;"	d
+NVRAM_PEXTLO	kclock.h	23;"	d
+PADDR	pmap.h	25;"	d
+RELOC	entry.S	18;"	d
+SCROLLLOCK	console.c	222;"	d	file:
+SHIFT	console.c	216;"	d	file:
+SRL	entry.S	7;"	d
+_CONSOLE_H_	console.h	4;"	d
+_kaddr	pmap.h	40;"	f
+_paddr	pmap.h	28;"	f
+_panic	init.c	49;"	f
+_start	entry.S	40;"	d
+_warn	init.c	74;"	f
+addr_6845	console.c	128;"	v	file:
+boot_alloc	pmap.c	81;"	f	file:
+boot_map_region	pmap.c	334;"	f	file:
+bootstack	entry.S	92;"	l
+bootstacktop	entry.S	95;"	l
+buf	console.c	384;"	m	struct:__anon1	file:
+cga_init	console.c	133;"	f	file:
+cga_putc	console.c	163;"	f	file:
+charcode	console.c	304;"	v	file:
+check_kern_pgdir	pmap.c	573;"	f	file:
+check_page	pmap.c	637;"	f	file:
+check_page_alloc	pmap.c	491;"	f	file:
+check_page_free_list	pmap.c	431;"	f	file:
+check_page_installed_pgdir	pmap.c	785;"	f	file:
+check_va2pa	pmap.c	621;"	f	file:
+cons	console.c	387;"	v	typeref:struct:__anon1	file:
+cons_getc	console.c	407;"	f
+cons_init	console.c	438;"	f
+cons_intr	console.c	392;"	f	file:
+cons_putc	console.c	429;"	f	file:
+cprintf	printf.c	26;"	f
+cputchar	console.c	452;"	f
+crt_buf	console.c	129;"	v	file:
+crt_pos	console.c	130;"	v	file:
+ctlmap	console.c	287;"	v	file:
+debuginfo_eip	kdebug.c	105;"	f
+delay	console.c	16;"	f	file:
+eip_file	kdebug.h	8;"	m	struct:Eipdebuginfo
+eip_fn_addr	kdebug.h	14;"	m	struct:Eipdebuginfo
+eip_fn_name	kdebug.h	11;"	m	struct:Eipdebuginfo
+eip_fn_namelen	kdebug.h	13;"	m	struct:Eipdebuginfo
+eip_fn_narg	kdebug.h	15;"	m	struct:Eipdebuginfo
+eip_line	kdebug.h	9;"	m	struct:Eipdebuginfo
+entry	entry.S	43;"	l
+entry_pgdir	entrypgdir.c	21;"	v
+entry_pgtable	entrypgdir.c	33;"	v
+entry_pgtable	entrypgdir.c	4;"	v
+getchar	console.c	458;"	f
+i386_detect_memory	pmap.c	33;"	f	file:
+i386_init	init.c	14;"	f
+iscons	console.c	468;"	f
+kbd_init	console.c	370;"	f	file:
+kbd_intr	console.c	364;"	f
+kbd_proc_data	console.c	316;"	f	file:
+kern_pgdir	pmap.c	17;"	v
+lpt_putc	console.c	112;"	f	file:
+mc146818_read	kclock.c	11;"	f
+mc146818_write	kclock.c	18;"	f
+mem_init	pmap.c	115;"	f
+normalmap	console.c	243;"	v	file:
+npages	pmap.c	13;"	v
+npages_basemem	pmap.c	14;"	v	file:
+nvram_read	pmap.c	27;"	f	file:
+pa2page	pmap.h	72;"	f
+page2kva	pmap.h	80;"	f
+page2pa	pmap.h	66;"	f
+page_alloc	pmap.c	267;"	f
+page_decref	pmap.c	288;"	f
+page_free	pmap.c	278;"	f
+page_free_list	pmap.c	19;"	v	typeref:struct:PageInfo	file:
+page_init	pmap.c	230;"	f
+page_insert	pmap.c	365;"	f
+page_lookup	pmap.c	383;"	f
+page_remove	pmap.c	405;"	f
+pages	pmap.c	18;"	v	typeref:struct:PageInfo
+panicstr	init.c	42;"	v
+pgdir_walk	pmap.c	317;"	f
+putch	printf.c	10;"	f	file:
+relocated	entry.S	69;"	l
+rpos	console.c	385;"	m	struct:__anon1	file:
+serial_exists	console.c	48;"	v	file:
+serial_init	console.c	79;"	f	file:
+serial_intr	console.c	59;"	f
+serial_proc_data	console.c	51;"	f	file:
+serial_putc	console.c	66;"	f	file:
+shiftcode	console.c	226;"	v	file:
+shiftmap	console.c	264;"	v	file:
+spin	entry.S	83;"	l
+stab_binsearch	kdebug.c	51;"	f	file:
+tlb_invalidate	pmap.c	415;"	f
+togglecode	console.c	236;"	v	file:
+vcprintf	printf.c	17;"	f
+wpos	console.c	386;"	m	struct:__anon1	file:
