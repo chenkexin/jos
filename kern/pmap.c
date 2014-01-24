@@ -306,7 +306,7 @@ page_alloc(int alloc_flags)
 {
 	// Fill this function in
   struct PageInfo* temp;
-	if( !page_free_list) 
+	if( page_free_list == NULL) 
 		return NULL;
   else
 	{
@@ -376,7 +376,7 @@ pgdir_walk(pde_t *pgdir, const void *va, int create)
 {
 	// Fill this function in
   pde_t* page_dir_entry = pgdir + PDX(va);
-  pte_t* page_table_entry = (pte_t*)PTE_ADDR(page_dir_entry);
+  pte_t* page_table_entry = (pte_t*)PTE_ADDR(*page_dir_entry);
   if( page_table_entry == NULL)
   {
     //the entry's page does not exist
@@ -387,7 +387,7 @@ pgdir_walk(pde_t *pgdir, const void *va, int create)
 			{
 				pgdir[PDX(va)] = page2pa(temp)|PTE_P|PTE_W;
 				temp->pp_ref ++;
-				page_table_entry = (pte_t*)PTE_ADDR(page_dir_entry);
+				page_table_entry = (pte_t*)PTE_ADDR(*page_dir_entry);
 				pte_t* addr = KADDR((uintptr_t)(page_table_entry + PTX(va)));
        return addr;
 			}
@@ -412,6 +412,7 @@ static void
 boot_map_region(pde_t *pgdir, uintptr_t va, size_t size, physaddr_t pa, int perm)
 {
 	// Fill this function in
+	
 }
 
 //
@@ -443,6 +444,23 @@ int
 page_insert(pde_t *pgdir, struct PageInfo *pp, void *va, int perm)
 {
 	// Fill this function in
+  pte_t* page_physaddr_temp = pgdir_walk(pgdir, va, 1);
+	if(page_physaddr_temp != NULL)
+	{
+		//it means the address va has already been used, just remove it.
+	  tlb_invalidate(pgdir, va);
+		page_remove(pgdir, va);
+	}
+	else return -E_NO_MEM;
+	
+//*********************
+//here and PTE_ADDR(*)
+//**********************
+  pte_t* page_table_entry = page_physaddr_temp + PDX(va); 
+  if(page2pa(pp) == PTE_ADDR(*page_table_entry)) --pp->pp_ref;
+	pgdir[PDX(va)] = pgdir[PDX(va)]|perm;
+	*page_table_entry = page2pa(pp) |perm|PTE_P;
+	pp->pp_ref++;
 	return 0;
 }
 
@@ -461,6 +479,15 @@ struct PageInfo *
 page_lookup(pde_t *pgdir, void *va, pte_t **pte_store)
 {
 	// Fill this function in
+	// since it requires the page corresponding to 'va', it has no needs to use PGOFF(va) to get actual physical address.
+	pte_t* page_table_entry = pgdir_walk(pgdir, va, 0);
+  if(page_table_entry != NULL)
+	{
+		//page
+	  struct PageInfo* temp = pa2page(PTE_ADDR(*page_table_entry));	
+	  if(pte_store != 0) *pte_store = (pte_t*)page_table_entry;
+		return temp;	
+	}	
 	return NULL;
 }
 
@@ -483,6 +510,14 @@ void
 page_remove(pde_t *pgdir, void *va)
 {
 	// Fill this function in
+	pte_t* page_table_entry;
+	struct PageInfo* temp = page_lookup(pgdir, va, &page_table_entry);
+	if(temp != NULL)
+	{
+		page_decref(temp);
+		*page_table_entry = 0;
+		tlb_invalidate(pgdir, va);	
+	}
 }
 
 //
@@ -494,7 +529,8 @@ tlb_invalidate(pde_t *pgdir, void *va)
 {
 	// Flush the entry only if we're modifying the current address space.
 	// For now, there is only one address space, so always invalidate.
-	invlpg(va);
+	
+  invlpg(va);
 }
 
 
