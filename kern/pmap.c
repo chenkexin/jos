@@ -276,6 +276,7 @@ page_init(void)
 		}
     physaddr_t temp_physaddr = page2pa(&pages[i]);
     uintptr_t temp_boot_alloc = (uintptr_t)boot_alloc(0);
+    //because this is physical address.
     physaddr_t temp_addr = (physaddr_t)(temp_boot_alloc - KERNBASE);
     if( (temp_physaddr >0 && temp_physaddr < IOPHYSMEM) || temp_physaddr >= temp_addr )
 		{
@@ -312,6 +313,7 @@ page_alloc(int alloc_flags)
 		temp = page_free_list;
     page_free_list = temp->pp_link;
     temp->pp_link = NULL;
+    temp->pp_ref = 0;
 	}
   if(alloc_flags & ALLOC_ZERO)
 	{
@@ -373,7 +375,27 @@ pte_t *
 pgdir_walk(pde_t *pgdir, const void *va, int create)
 {
 	// Fill this function in
-	return NULL;
+  pde_t* page_dir_entry = pgdir + PDX(va);
+  pte_t* page_table_entry = (pte_t*)PTE_ADDR(page_dir_entry);
+  if( page_table_entry == NULL)
+  {
+    //the entry's page does not exist
+		if(create)
+		{
+			struct PageInfo* temp = page_alloc(ALLOC_ZERO);
+  		if(temp != NULL)
+			{
+				pgdir[PDX(va)] = page2pa(temp)|PTE_P|PTE_W;
+				temp->pp_ref ++;
+				page_table_entry = (pte_t*)PTE_ADDR(page_dir_entry);
+				pte_t* addr = KADDR((uintptr_t)(page_table_entry + PTX(va)));
+       return addr;
+			}
+ 			else return NULL;
+		}
+		else return NULL;
+  }
+  else return KADDR((uintptr_t)(page_table_entry + PTX(va)));
 }
 
 //
