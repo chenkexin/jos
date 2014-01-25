@@ -1,0 +1,421 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+CMDBYTE	kbdreg.h	60;"	d
+CR0_AM	mmu.h	86;"	d
+CR0_CD	mmu.h	88;"	d
+CR0_EM	mmu.h	81;"	d
+CR0_ET	mmu.h	83;"	d
+CR0_MP	mmu.h	80;"	d
+CR0_NE	mmu.h	84;"	d
+CR0_NW	mmu.h	87;"	d
+CR0_PE	mmu.h	79;"	d
+CR0_PG	mmu.h	89;"	d
+CR0_TS	mmu.h	82;"	d
+CR0_WP	mmu.h	85;"	d
+CR4_DE	mmu.h	94;"	d
+CR4_MCE	mmu.h	92;"	d
+CR4_PCE	mmu.h	91;"	d
+CR4_PSE	mmu.h	93;"	d
+CR4_PVI	mmu.h	96;"	d
+CR4_TSD	mmu.h	95;"	d
+CR4_VME	mmu.h	97;"	d
+ELF_MAGIC	elf.h	4;"	d
+ELF_PROG_FLAG_EXEC	elf.h	52;"	d
+ELF_PROG_FLAG_READ	elf.h	54;"	d
+ELF_PROG_FLAG_WRITE	elf.h	53;"	d
+ELF_PROG_LOAD	elf.h	49;"	d
+ELF_SHN_UNDEF	elf.h	63;"	d
+ELF_SHT_NULL	elf.h	57;"	d
+ELF_SHT_PROGBITS	elf.h	58;"	d
+ELF_SHT_STRTAB	elf.h	60;"	d
+ELF_SHT_SYMTAB	elf.h	59;"	d
+EXTPHYSMEM	memlayout.h	93;"	d
+E_BAD_ENV	error.h	9;"	e	enum:__anon2
+E_FAULT	error.h	15;"	e	enum:__anon2
+E_INVAL	error.h	11;"	e	enum:__anon2
+E_NO_FREE_ENV	error.h	13;"	e	enum:__anon2
+E_NO_MEM	error.h	12;"	e	enum:__anon2
+E_UNSPECIFIED	error.h	8;"	e	enum:__anon2
+Elf	elf.h	6;"	s
+FEC_PR	mmu.h	123;"	d
+FEC_U	mmu.h	125;"	d
+FEC_WR	mmu.h	124;"	d
+FL_AC	mmu.h	117;"	d
+FL_AF	mmu.h	102;"	d
+FL_CF	mmu.h	100;"	d
+FL_DF	mmu.h	107;"	d
+FL_ID	mmu.h	120;"	d
+FL_IF	mmu.h	106;"	d
+FL_IOPL_0	mmu.h	110;"	d
+FL_IOPL_1	mmu.h	111;"	d
+FL_IOPL_2	mmu.h	112;"	d
+FL_IOPL_3	mmu.h	113;"	d
+FL_IOPL_MASK	mmu.h	109;"	d
+FL_NT	mmu.h	114;"	d
+FL_OF	mmu.h	108;"	d
+FL_PF	mmu.h	101;"	d
+FL_RF	mmu.h	115;"	d
+FL_SF	mmu.h	104;"	d
+FL_TF	mmu.h	105;"	d
+FL_VIF	mmu.h	118;"	d
+FL_VIP	mmu.h	119;"	d
+FL_VM	mmu.h	116;"	d
+FL_ZF	mmu.h	103;"	d
+GD_KD	memlayout.h	16;"	d
+GD_KT	memlayout.h	15;"	d
+GD_TSS0	memlayout.h	19;"	d
+GD_UD	memlayout.h	18;"	d
+GD_UT	memlayout.h	17;"	d
+Gatedesc	mmu.h	256;"	s
+IOPHYSMEM	memlayout.h	92;"	d
+JOS_INC_ASSERT_H	assert.h	4;"	d
+JOS_INC_ELF_H	elf.h	2;"	d
+JOS_INC_ERROR_H	error.h	4;"	d
+JOS_INC_MEMLAYOUT_H	memlayout.h	2;"	d
+JOS_INC_MMU_H	mmu.h	2;"	d
+JOS_INC_STDARG_H	stdarg.h	4;"	d
+JOS_INC_STDIO_H	stdio.h	2;"	d
+JOS_INC_STRING_H	string.h	2;"	d
+JOS_INC_TYPES_H	types.h	2;"	d
+JOS_INC_X86_H	x86.h	2;"	d
+JOS_KBDREG_H	kbdreg.h	2;"	d
+JOS_STAB_H	stab.h	2;"	d
+KBCMDP	kbdreg.h	29;"	d
+KBC_AUXDISABLE	kbdreg.h	32;"	d
+KBC_AUXECHO	kbdreg.h	36;"	d
+KBC_AUXENABLE	kbdreg.h	33;"	d
+KBC_AUXTEST	kbdreg.h	34;"	d
+KBC_AUXWRITE	kbdreg.h	37;"	d
+KBC_DISABLE	kbdreg.h	66;"	d
+KBC_ECHO	kbdreg.h	71;"	d
+KBC_ENABLE	kbdreg.h	67;"	d
+KBC_KBDDISABLE	kbdreg.h	40;"	d
+KBC_KBDECHO	kbdreg.h	35;"	d
+KBC_KBDENABLE	kbdreg.h	41;"	d
+KBC_KBDTEST	kbdreg.h	39;"	d
+KBC_MODEIND	kbdreg.h	70;"	d
+KBC_PULSE0	kbdreg.h	42;"	d
+KBC_PULSE1	kbdreg.h	43;"	d
+KBC_PULSE2	kbdreg.h	44;"	d
+KBC_PULSE3	kbdreg.h	45;"	d
+KBC_RAMREAD	kbdreg.h	30;"	d
+KBC_RAMWRITE	kbdreg.h	31;"	d
+KBC_RESEND	kbdreg.h	64;"	d
+KBC_RESET	kbdreg.h	63;"	d
+KBC_SELFTEST	kbdreg.h	38;"	d
+KBC_SETDEFAULT	kbdreg.h	65;"	d
+KBC_SETTABLE	kbdreg.h	69;"	d
+KBC_TYPEMATIC	kbdreg.h	68;"	d
+KBDATAP	kbdreg.h	47;"	d
+KBOUTP	kbdreg.h	48;"	d
+KBR_ACK	kbdreg.h	76;"	d
+KBR_BREAK	kbdreg.h	79;"	d
+KBR_ECHO	kbdreg.h	81;"	d
+KBR_EXTENDED	kbdreg.h	74;"	d
+KBR_FAILURE	kbdreg.h	78;"	d
+KBR_OVERRUN	kbdreg.h	77;"	d
+KBR_RESEND	kbdreg.h	75;"	d
+KBR_RSTDONE	kbdreg.h	80;"	d
+KBSTATP	kbdreg.h	19;"	d
+KBS_DIB	kbdreg.h	20;"	d
+KBS_IBF	kbdreg.h	21;"	d
+KBS_NOSEC	kbdreg.h	24;"	d
+KBS_OCMD	kbdreg.h	23;"	d
+KBS_PERR	kbdreg.h	27;"	d
+KBS_RERR	kbdreg.h	26;"	d
+KBS_TERR	kbdreg.h	25;"	d
+KBS_WARM	kbdreg.h	22;"	d
+KC8_CPU	kbdreg.h	57;"	d
+KC8_IGNSEC	kbdreg.h	56;"	d
+KC8_KDISABLE	kbdreg.h	55;"	d
+KC8_KENABLE	kbdreg.h	59;"	d
+KC8_MDISABLE	kbdreg.h	54;"	d
+KC8_MENABLE	kbdreg.h	58;"	d
+KC8_TRANS	kbdreg.h	53;"	d
+KERNBASE	memlayout.h	87;"	d
+KEY_DEL	kbdreg.h	14;"	d
+KEY_DN	kbdreg.h	8;"	d
+KEY_END	kbdreg.h	6;"	d
+KEY_HOME	kbdreg.h	5;"	d
+KEY_INS	kbdreg.h	13;"	d
+KEY_LF	kbdreg.h	9;"	d
+KEY_PGDN	kbdreg.h	12;"	d
+KEY_PGUP	kbdreg.h	11;"	d
+KEY_RT	kbdreg.h	10;"	d
+KEY_UP	kbdreg.h	7;"	d
+KSTACKTOP	memlayout.h	96;"	d
+KSTKGAP	memlayout.h	98;"	d
+KSTKSIZE	memlayout.h	97;"	d
+K_LDCMDBYTE	kbdreg.h	51;"	d
+K_RDCMDBYTE	kbdreg.h	50;"	d
+MAX	types.h	49;"	d
+MAXERROR	error.h	17;"	e	enum:__anon2
+MIN	types.h	43;"	d
+MMIOBASE	memlayout.h	102;"	d
+MMIOLIM	memlayout.h	101;"	d
+NPDENTRIES	mmu.h	45;"	d
+NPTENTRIES	mmu.h	46;"	d
+NULL	stdio.h	7;"	d
+NULL	types.h	5;"	d
+N_BCOMM	stab.h	37;"	d
+N_BINCL	stab.h	29;"	d
+N_BSLINE	stab.h	25;"	d
+N_DSLINE	stab.h	24;"	d
+N_ECOML	stab.h	39;"	d
+N_ECOMM	stab.h	38;"	d
+N_EINCL	stab.h	32;"	d
+N_ENTRY	stab.h	33;"	d
+N_EXCL	stab.h	35;"	d
+N_FNAME	stab.h	16;"	d
+N_FUN	stab.h	17;"	d
+N_GSYM	stab.h	15;"	d
+N_LBRAC	stab.h	34;"	d
+N_LCSYM	stab.h	19;"	d
+N_LENG	stab.h	40;"	d
+N_LSYM	stab.h	28;"	d
+N_MAIN	stab.h	20;"	d
+N_PC	stab.h	21;"	d
+N_PSYM	stab.h	31;"	d
+N_RBRAC	stab.h	36;"	d
+N_RSYM	stab.h	22;"	d
+N_SLINE	stab.h	23;"	d
+N_SO	stab.h	27;"	d
+N_SOL	stab.h	30;"	d
+N_SSYM	stab.h	26;"	d
+N_STSYM	stab.h	18;"	d
+PDX	mmu.h	33;"	d
+PDXSHIFT	mmu.h	55;"	d
+PFTEMP	memlayout.h	137;"	d
+PGADDR	mmu.h	42;"	d
+PGNUM	mmu.h	30;"	d
+PGOFF	mmu.h	39;"	d
+PGSHIFT	mmu.h	49;"	d
+PGSIZE	mmu.h	48;"	d
+PTE_A	mmu.h	63;"	d
+PTE_ADDR	mmu.h	76;"	d
+PTE_AVAIL	mmu.h	70;"	d
+PTE_D	mmu.h	64;"	d
+PTE_G	mmu.h	66;"	d
+PTE_P	mmu.h	58;"	d
+PTE_PCD	mmu.h	62;"	d
+PTE_PS	mmu.h	65;"	d
+PTE_PWT	mmu.h	61;"	d
+PTE_SYSCALL	mmu.h	73;"	d
+PTE_U	mmu.h	60;"	d
+PTE_W	mmu.h	59;"	d
+PTSHIFT	mmu.h	52;"	d
+PTSIZE	mmu.h	51;"	d
+PTX	mmu.h	36;"	d
+PTXSHIFT	mmu.h	54;"	d
+PageInfo	memlayout.h	175;"	s
+Proghdr	elf.h	24;"	s
+Pseudodesc	mmu.h	310;"	s
+ROUNDDOWN	types.h	58;"	d
+ROUNDUP	types.h	65;"	d
+SEG	mmu.h	142;"	d
+SEG	mmu.h	172;"	d
+SEG16	mmu.h	176;"	d
+SEG_FAULT	mmu.h	170;"	d
+SEG_NULL	mmu.h	139;"	d
+SEG_NULL	mmu.h	168;"	d
+SETCALLGATE	mmu.h	296;"	d
+SETGATE	mmu.h	282;"	d
+STA_A	mmu.h	189;"	d
+STA_C	mmu.h	186;"	d
+STA_E	mmu.h	185;"	d
+STA_R	mmu.h	188;"	d
+STA_W	mmu.h	187;"	d
+STA_X	mmu.h	184;"	d
+STS_CG16	mmu.h	195;"	d
+STS_CG32	mmu.h	201;"	d
+STS_IG16	mmu.h	197;"	d
+STS_IG32	mmu.h	202;"	d
+STS_LDT	mmu.h	193;"	d
+STS_T16A	mmu.h	192;"	d
+STS_T16B	mmu.h	194;"	d
+STS_T32A	mmu.h	199;"	d
+STS_T32B	mmu.h	200;"	d
+STS_TG	mmu.h	196;"	d
+STS_TG16	mmu.h	198;"	d
+STS_TG32	mmu.h	203;"	d
+Secthdr	elf.h	35;"	s
+Segdesc	mmu.h	152;"	s
+Stab	stab.h	43;"	s
+Taskstate	mmu.h	215;"	s
+UENVS	memlayout.h	116;"	d
+ULIM	memlayout.h	104;"	d
+UPAGES	memlayout.h	114;"	d
+USTABDATA	memlayout.h	139;"	d
+USTACKTOP	memlayout.h	128;"	d
+UTEMP	memlayout.h	134;"	d
+UTEXT	memlayout.h	131;"	d
+UTOP	memlayout.h	123;"	d
+UVPT	memlayout.h	112;"	d
+UXSTACKTOP	memlayout.h	125;"	d
+assert	assert.h	14;"	d
+bool	types.h	9;"	t
+breakpoint	x86.h	39;"	f
+cpuid	x86.h	259;"	f
+e_ehsize	elf.h	16;"	m	struct:Elf
+e_elf	elf.h	8;"	m	struct:Elf
+e_entry	elf.h	12;"	m	struct:Elf
+e_flags	elf.h	15;"	m	struct:Elf
+e_machine	elf.h	10;"	m	struct:Elf
+e_magic	elf.h	7;"	m	struct:Elf
+e_phentsize	elf.h	17;"	m	struct:Elf
+e_phnum	elf.h	18;"	m	struct:Elf
+e_phoff	elf.h	13;"	m	struct:Elf
+e_shentsize	elf.h	19;"	m	struct:Elf
+e_shnum	elf.h	20;"	m	struct:Elf
+e_shoff	elf.h	14;"	m	struct:Elf
+e_shstrndx	elf.h	21;"	m	struct:Elf
+e_type	elf.h	9;"	m	struct:Elf
+e_version	elf.h	11;"	m	struct:Elf
+false	types.h	10;"	e	enum:__anon1
+gd_args	mmu.h	259;"	m	struct:Gatedesc
+gd_dpl	mmu.h	263;"	m	struct:Gatedesc
+gd_off_15_0	mmu.h	257;"	m	struct:Gatedesc
+gd_off_31_16	mmu.h	265;"	m	struct:Gatedesc
+gd_p	mmu.h	264;"	m	struct:Gatedesc
+gd_rsv1	mmu.h	260;"	m	struct:Gatedesc
+gd_s	mmu.h	262;"	m	struct:Gatedesc
+gd_sel	mmu.h	258;"	m	struct:Gatedesc
+gd_type	mmu.h	261;"	m	struct:Gatedesc
+inb	x86.h	45;"	f
+inl	x86.h	79;"	f
+insb	x86.h	53;"	f
+insl	x86.h	87;"	f
+insw	x86.h	70;"	f
+int16_t	types.h	15;"	t
+int32_t	types.h	17;"	t
+int64_t	types.h	19;"	t
+int8_t	types.h	13;"	t
+intptr_t	types.h	26;"	t
+invlpg	x86.h	141;"	f
+inw	x86.h	62;"	f
+lcr0	x86.h	171;"	f
+lcr3	x86.h	193;"	f
+lcr4	x86.h	207;"	f
+lgdt	x86.h	153;"	f
+lidt	x86.h	147;"	f
+lldt	x86.h	159;"	f
+ltr	x86.h	165;"	f
+n_desc	stab.h	47;"	m	struct:Stab
+n_other	stab.h	46;"	m	struct:Stab
+n_strx	stab.h	44;"	m	struct:Stab
+n_type	stab.h	45;"	m	struct:Stab
+n_value	stab.h	48;"	m	struct:Stab
+off_t	types.h	40;"	t
+offsetof	types.h	72;"	d
+outb	x86.h	96;"	f
+outl	x86.h	135;"	f
+outsb	x86.h	102;"	f
+outsl	x86.h	126;"	f
+outsw	x86.h	117;"	f
+outw	x86.h	111;"	f
+p_align	elf.h	32;"	m	struct:Proghdr
+p_filesz	elf.h	29;"	m	struct:Proghdr
+p_flags	elf.h	31;"	m	struct:Proghdr
+p_memsz	elf.h	30;"	m	struct:Proghdr
+p_offset	elf.h	26;"	m	struct:Proghdr
+p_pa	elf.h	28;"	m	struct:Proghdr
+p_type	elf.h	25;"	m	struct:Proghdr
+p_va	elf.h	27;"	m	struct:Proghdr
+panic	assert.h	12;"	d
+pd_base	mmu.h	312;"	m	struct:Pseudodesc
+pd_lim	mmu.h	311;"	m	struct:Pseudodesc
+pde_t	memlayout.h	144;"	t
+physaddr_t	types.h	28;"	t
+pp_link	memlayout.h	177;"	m	struct:PageInfo	typeref:struct:PageInfo::PageInfo
+pp_ref	memlayout.h	184;"	m	struct:PageInfo
+ppn_t	types.h	31;"	t
+pte_t	memlayout.h	143;"	t
+rcr0	x86.h	177;"	f
+rcr2	x86.h	185;"	f
+rcr3	x86.h	199;"	f
+rcr4	x86.h	213;"	f
+read_ebp	x86.h	243;"	f
+read_eflags	x86.h	229;"	f
+read_esp	x86.h	251;"	f
+read_tsc	x86.h	276;"	f
+sd_avl	mmu.h	161;"	m	struct:Segdesc
+sd_base_15_0	mmu.h	154;"	m	struct:Segdesc
+sd_base_23_16	mmu.h	155;"	m	struct:Segdesc
+sd_base_31_24	mmu.h	165;"	m	struct:Segdesc
+sd_db	mmu.h	163;"	m	struct:Segdesc
+sd_dpl	mmu.h	158;"	m	struct:Segdesc
+sd_g	mmu.h	164;"	m	struct:Segdesc
+sd_lim_15_0	mmu.h	153;"	m	struct:Segdesc
+sd_lim_19_16	mmu.h	160;"	m	struct:Segdesc
+sd_p	mmu.h	159;"	m	struct:Segdesc
+sd_rsv1	mmu.h	162;"	m	struct:Segdesc
+sd_s	mmu.h	157;"	m	struct:Segdesc
+sd_type	mmu.h	156;"	m	struct:Segdesc
+sh_addr	elf.h	39;"	m	struct:Secthdr
+sh_addralign	elf.h	44;"	m	struct:Secthdr
+sh_entsize	elf.h	45;"	m	struct:Secthdr
+sh_flags	elf.h	38;"	m	struct:Secthdr
+sh_info	elf.h	43;"	m	struct:Secthdr
+sh_link	elf.h	42;"	m	struct:Secthdr
+sh_name	elf.h	36;"	m	struct:Secthdr
+sh_offset	elf.h	40;"	m	struct:Secthdr
+sh_size	elf.h	41;"	m	struct:Secthdr
+sh_type	elf.h	37;"	m	struct:Secthdr
+size_t	types.h	34;"	t
+ssize_t	types.h	37;"	t
+static_assert	assert.h	18;"	d
+tlbflush	x86.h	221;"	f
+true	types.h	10;"	e	enum:__anon1
+ts_cr3	mmu.h	226;"	m	struct:Taskstate
+ts_cs	mmu.h	239;"	m	struct:Taskstate
+ts_ds	mmu.h	243;"	m	struct:Taskstate
+ts_eax	mmu.h	229;"	m	struct:Taskstate
+ts_ebp	mmu.h	234;"	m	struct:Taskstate
+ts_ebx	mmu.h	232;"	m	struct:Taskstate
+ts_ecx	mmu.h	230;"	m	struct:Taskstate
+ts_edi	mmu.h	236;"	m	struct:Taskstate
+ts_edx	mmu.h	231;"	m	struct:Taskstate
+ts_eflags	mmu.h	228;"	m	struct:Taskstate
+ts_eip	mmu.h	227;"	m	struct:Taskstate
+ts_es	mmu.h	237;"	m	struct:Taskstate
+ts_esi	mmu.h	235;"	m	struct:Taskstate
+ts_esp	mmu.h	233;"	m	struct:Taskstate
+ts_esp0	mmu.h	217;"	m	struct:Taskstate
+ts_esp1	mmu.h	220;"	m	struct:Taskstate
+ts_esp2	mmu.h	223;"	m	struct:Taskstate
+ts_fs	mmu.h	245;"	m	struct:Taskstate
+ts_gs	mmu.h	247;"	m	struct:Taskstate
+ts_iomb	mmu.h	252;"	m	struct:Taskstate
+ts_ldt	mmu.h	249;"	m	struct:Taskstate
+ts_link	mmu.h	216;"	m	struct:Taskstate
+ts_padding1	mmu.h	219;"	m	struct:Taskstate
+ts_padding10	mmu.h	250;"	m	struct:Taskstate
+ts_padding2	mmu.h	222;"	m	struct:Taskstate
+ts_padding3	mmu.h	225;"	m	struct:Taskstate
+ts_padding4	mmu.h	238;"	m	struct:Taskstate
+ts_padding5	mmu.h	240;"	m	struct:Taskstate
+ts_padding6	mmu.h	242;"	m	struct:Taskstate
+ts_padding7	mmu.h	244;"	m	struct:Taskstate
+ts_padding8	mmu.h	246;"	m	struct:Taskstate
+ts_padding9	mmu.h	248;"	m	struct:Taskstate
+ts_ss	mmu.h	241;"	m	struct:Taskstate
+ts_ss0	mmu.h	218;"	m	struct:Taskstate
+ts_ss1	mmu.h	221;"	m	struct:Taskstate
+ts_ss2	mmu.h	224;"	m	struct:Taskstate
+ts_t	mmu.h	251;"	m	struct:Taskstate
+uint16_t	types.h	16;"	t
+uint32_t	types.h	18;"	t
+uint64_t	types.h	20;"	t
+uint8_t	types.h	14;"	t
+uintptr_t	types.h	27;"	t
+va_arg	stdarg.h	10;"	d
+va_end	stdarg.h	12;"	d
+va_list	stdarg.h	6;"	t
+va_start	stdarg.h	8;"	d
+warn	assert.h	11;"	d
+write_eflags	x86.h	237;"	f
+xchg	x86.h	284;"	f
