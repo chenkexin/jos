@@ -190,7 +190,9 @@ env_setup_vm(struct Env *e)
 	e->env_pgdir = p;
 	// UVPT maps the env's own page table read-only.
 	// Permissions: kernel R, user R
-	e->env_pgdir[PDX(UVPT)] = PADDR(e->env_pgdir) | PTE_P | PTE_U;
+	e->env_pgdir[PDX(UVPT)] = PADDR(e->env_pgdir) | PTE_P;
+	//others remains to be set
+
 
 	return 0;
 }
@@ -275,6 +277,22 @@ region_alloc(struct Env *e, void *va, size_t len)
 	//   'va' and 'len' values that are not page-aligned.
 	//   You should round va down, and round (va + len) up.
 	//   (Watch out for corner-cases!)
+	char* begin = ROUNDDOWN(va, PGSIZE);
+	char* end = ROUNDUP(va+len, PGSIZE);
+	while( begin != end )
+	{
+		pte* entry = pgdir_walk(e->pgdir, begin, 1);
+		if( entry != null)
+		{
+			struct PageInfo temp_page = page_alloc(0);
+			if( temp_page != null)
+			{
+				temp_page.pp_ref ++;
+				*entry = page2pa(temp_page)|PTE_U|PTE_P|PTE_W;
+			}	
+		}
+		begin += PGSIZE;
+	}	
 }
 
 //
@@ -331,7 +349,20 @@ load_icode(struct Env *e, uint8_t *binary, size_t size)
 	//  What?  (See env_run() and env_pop_tf() below.)
 
 	// LAB 3: Your code here.
-
+	struct Proghdr *ph;
+	struct Proghdr *eph;
+	if((struct Elf*)binary->e_magic != ELF_MAGIC)
+		goto bad;
+	ph = (struct Proghdr*)((binary + ((struct Elf*)binary)->e_phoff);
+			
+	eph = ph + ((struct Proghdr*)binary)->e_phnum;
+	for(; ph < eph; ph++)
+	{
+		if( ph->p_type == ELF_PROG_LOAD )
+		{
+			//load the segment	
+		}
+	}
 	// Now map one page for the program's initial stack
 	// at virtual address USTACKTOP - PGSIZE.
 
