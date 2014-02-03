@@ -187,7 +187,7 @@ env_setup_vm(struct Env *e)
 	// LAB 3: Your code here.
 	memset(p, 0, PGSIZE);
 	p[PDX(UTOP)] = PADDR(p)|PTE_U|PTE_P;
-	e->env_pgdir = p;
+	e->env_pgdir = page2kva(p);
 	// UVPT maps the env's own page table read-only.
 	// Permissions: kernel R, user R
 	e->env_pgdir[PDX(UVPT)] = PADDR(e->env_pgdir) | PTE_P;
