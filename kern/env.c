@@ -189,7 +189,12 @@ env_setup_vm(struct Env *e)
 	e->env_pgdir = page2kva(p);
 	//set the page directory as kern_pgdir
 	memmove(e->env_pgdir, kern_pgdir, PGSIZE);
-	// UVPT maps the env's own page table read-only.
+/*=======
+	p[PDX(UTOP)] = PADDR(p)|PTE_U|PTE_P;
+	e->env_pgdir = page2kva(p);
+>>>>>>> 36327c81738c6bf2fa3761bcf8b88a6b61246ea6
+	*/
+  // UVPT maps the env's own page table read-only.
 	// Permissions: kernel R, user R
 	e->env_pgdir[PDX(UVPT)] = PADDR(e->env_pgdir) | PTE_P;
 	//others remains to be set
