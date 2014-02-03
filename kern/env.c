@@ -189,12 +189,7 @@ env_setup_vm(struct Env *e)
 	e->env_pgdir = page2kva(p);
 	//set the page directory as kern_pgdir
 	memmove(e->env_pgdir, kern_pgdir, PGSIZE);
-/*=======
-	p[PDX(UTOP)] = PADDR(p)|PTE_U|PTE_P;
-	e->env_pgdir = page2kva(p);
->>>>>>> 36327c81738c6bf2fa3761bcf8b88a6b61246ea6
-	*/
-  // UVPT maps the env's own page table read-only.
+	// UVPT maps the env's own page table read-only.
 	// Permissions: kernel R, user R
 	e->env_pgdir[PDX(UVPT)] = PADDR(e->env_pgdir) | PTE_P;
 	//others remains to be set
@@ -404,7 +399,7 @@ load_icode(struct Env *e, uint8_t *binary, size_t size)
   struct PageInfo* stack = page_alloc(0);
 	if(stack)
 	{
-		page_insert(e->env_pgdir,p, (void*)USTACKTOP-PGSIZE, PTE_W|PTE_P);
+		page_insert(e->env_pgdir,stack, (void*)USTACKTOP-PGSIZE, PTE_W|PTE_P);
 	}
 	else panic("in icode_load: stack page alloc wrong");
 	// LAB 3: Your code here.
@@ -552,9 +547,9 @@ env_run(struct Env *e)
 	curenv = e;
   e->env_status = ENV_RUNNING;
 	e->env_runs ++;
-	lcr3(e->env_pgdir);
+	lcr3(*e->env_pgdir);
 	env_pop_tf(&e->env_tf);
 	}
-	//panic("env_run not yet implemented");
+	panic("env_run not yet implemented");
 }
 
