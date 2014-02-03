@@ -119,7 +119,7 @@ env_init(void)
 	int i = NENV - 1;
  	for( i; i >= 0; i--)
 	{
-		envs[i].env_ids = 0;
+		envs[i].env_id = 0;
 		envs[i].env_link = env_free_list;
 		env_free_list = &envs[i];	
 	}
@@ -186,8 +186,9 @@ env_setup_vm(struct Env *e)
 
 	// LAB 3: Your code here.
 	memset(p, 0, PGSIZE);
-	p[PDX(UTOP)] = PADDR(p)|PTE_U|PTE_P;
-	e->env_pgdir = p;
+	e->env_pgdir = page2kva(p);
+	//set the page directory as kern_pgdir
+	memmove(e->env_pgdir, kern_pgdir, PGSIZE);
 	// UVPT maps the env's own page table read-only.
 	// Permissions: kernel R, user R
 	e->env_pgdir[PDX(UVPT)] = PADDR(e->env_pgdir) | PTE_P;
@@ -281,13 +282,13 @@ region_alloc(struct Env *e, void *va, size_t len)
 	char* end = ROUNDUP(va+len, PGSIZE);
 	while( begin != end )
 	{
-		pte* entry = pgdir_walk(e->pgdir, begin, 1);
-		if( entry != null)
+		pte_t* entry = pgdir_walk(e->env_pgdir, begin, 1);
+		if( entry != NULL)
 		{
-			struct PageInfo temp_page = page_alloc(0);
-			if( temp_page != null)
+			struct PageInfo* temp_page = page_alloc(0);
+			if( temp_page )
 			{
-				temp_page.pp_ref ++;
+				temp_page->pp_ref ++;
 				*entry = page2pa(temp_page)|PTE_U|PTE_P|PTE_W;
 			}	
 		}
@@ -351,21 +352,56 @@ load_icode(struct Env *e, uint8_t *binary, size_t size)
 	// LAB 3: Your code here.
 	struct Proghdr *ph;
 	struct Proghdr *eph;
-	if((struct Elf*)binary->e_magic != ELF_MAGIC)
-		goto bad;
-	ph = (struct Proghdr*)((binary + ((struct Elf*)binary)->e_phoff);
-			
-	eph = ph + ((struct Proghdr*)binary)->e_phnum;
+	if(((struct Elf*)binary)->e_magic != ELF_MAGIC)
+		panic("magic wrong");
+	ph = (struct Proghdr*)((binary + ((struct Elf*)binary)->e_phoff));
+	
+	//check size
+	if( ph->p_memsz < ph->p_filesz) panic("binary size wrong!");
+	
+	eph = ph + ((struct Elf*)binary)->e_phnum;
 	for(; ph < eph; ph++)
 	{
 		if( ph->p_type == ELF_PROG_LOAD )
 		{
-			//load the segment	
+			//load the segment
+			//alloc the memory for segment
+		  region_alloc(e,(void*)ph->p_va,(size_t)ph->p_memsz);
+			//memmove the bits to virtual memory
+			char* end = ROUNDUP((void*)ph->p_va + (size_t)ph->p_memsz, PGSIZE);
+			uint32_t page_num = ((*((uint32_t*)end)) - (*((uint32_t*)ph->p_va)))/PGSIZE;
+			int i = 0;
+			physaddr_t cur_va = ph->p_va;
+			uint32_t cur_offset = ph->p_offset;
+			uint32_t cur_filesz = ph->p_filesz;
+			//uint32_t cur_memsz = ph->p_memsz;
+			uint32_t gap = 0;
+			for( i; i < page_num; i++)
+			{
+				//for corner case
+				if( i == page_num -1)
+				{
+				  gap = cur_filesz - (i*PGSIZE);
+					if( gap < PGSIZE )
+						memmove(page2kva(pa2page(cur_va)), (void*)cur_offset, gap);
+					break;	
+				}
+				memmove(page2kva(pa2page(cur_va)), (void*)cur_offset, PGSIZE);
+				cur_va += PGSIZE;
+				cur_offset += PGSIZE; 
+			}
+		//and set others zero
+			memset( page2kva(pa2page(cur_va)) + gap, 0, (size_t)(ph->p_memsz - ph->p_filesz));
 		}
 	}
 	// Now map one page for the program's initial stack
 	// at virtual address USTACKTOP - PGSIZE.
-
+  struct PageInfo* stack = page_alloc(0);
+	if(stack)
+	{
+		page_insert(e->env_pgdir,p, (void*)USTACKTOP-PGSIZE, PTE_W|PTE_P);
+	}
+	else panic("in icode_load: stack page alloc wrong");
 	// LAB 3: Your code here.
 }
 
@@ -380,6 +416,11 @@ void
 env_create(uint8_t *binary, size_t size, enum EnvType type)
 {
 	// LAB 3: Your code here.
+  struct Env* e;
+	if(env_alloc(&e,0))
+		panic("env_create: env_alloc wrong");
+	load_icode(e, binary, size);
+	e->env_type = type;
 }
 
 //
