@@ -10,7 +10,6 @@
 #include <kern/console.h>
 #include <kern/monitor.h>
 #include <kern/kdebug.h>
-#include <kern/trap.h>
 
 #define CMDBUF_SIZE	80	// enough for one VGA text line
 
@@ -25,6 +24,7 @@ struct Command {
 static struct Command commands[] = {
 	{ "help", "Display this list of commands", mon_help },
 	{ "kerninfo", "Display information about the kernel", mon_kerninfo },
+  { "backtrace", "Backtrace the call stack", mon_backtrace},
 };
 #define NCOMMANDS (sizeof(commands)/sizeof(commands[0]))
 
@@ -60,7 +60,44 @@ int
 mon_backtrace(int argc, char **argv, struct Trapframe *tf)
 {
 	// Your code here.
-	return 0;
+  // when to the end, the passing arguements is 0,0,0
+  uint32_t arg1, arg2, arg3, arg4, arg5;
+  struct Eipdebuginfo info;
+  //info = (struct Eipdebuginfo*)malloc(sizeof(struct Eipdebuginfo));
+  uint32_t* ebp = (uint32_t*)read_ebp();
+  //eip(reg) is return value.
+	//ebp+0x4 is the eip's value. Study the calling convention when call test_backtrace and mon_backtrace, it is clear.
+  uint32_t* temp;
+  temp = ebp;
+  temp++;
+  uint32_t* eip = temp;
+  debuginfo_eip((uintptr_t)*eip, &info);
+  arg1 = *(++temp);
+  arg2 = *(++temp);
+  arg3 = *(++temp);
+  arg4 = *(++temp);
+  arg5 = *(++temp);
+  uint32_t bytes = (uint32_t)*eip - info.eip_fn_addr;
+  while( (ebp) != 0)
+	{
+    cprintf(" ebp %08x eip %08x args %08x %08x %08x %08x %08x\n\t", ebp, *eip, arg1, arg2, arg3, arg4, arg5);  
+  	//print source file, function name, and addr
+    cprintf(" %s:%d:", info.eip_file, info.eip_line);
+    cprintf(" %.*s", info.eip_fn_namelen, info.eip_fn_name);
+    cprintf("+%d\n", bytes);
+    ebp = (uint32_t*)(*ebp);
+    temp = ebp;
+		temp++;
+    eip = temp;
+    debuginfo_eip((uintptr_t)*eip, &info);
+    bytes = (uint32_t)*eip - info.eip_fn_addr;
+  	arg1 = *(++temp);
+  	arg2 = *(++temp);
+  	arg3 = *(++temp);
+  	arg4 = *(++temp);
+  	arg5 = *(++temp);
+	}
+  return 0;
 }
 
 
@@ -117,8 +154,6 @@ monitor(struct Trapframe *tf)
 	cprintf("Welcome to the JOS kernel monitor!\n");
 	cprintf("Type 'help' for a list of commands.\n");
 
-	if (tf != NULL)
-		print_trapframe(tf);
 
 	while (1) {
 		buf = readline("K> ");
