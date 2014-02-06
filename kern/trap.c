@@ -80,9 +80,11 @@ trap_init(void)
   void th13();
   void th14();
   void th16();
+	void th48();
   SETGATE(idt[0], 0, GD_KT, th0, 0);
   SETGATE(idt[1], 0, GD_KT, th1, 0);
   //modify 0 to 3 to pass breakpoint test.
+	SETGATE(idt[3], 0, GD_KT, th3, 0);
 	SETGATE(idt[3], 0, GD_KT, th3, 3);
   SETGATE(idt[4], 0, GD_KT, th4, 0);
   SETGATE(idt[5], 0, GD_KT, th5, 0);
@@ -96,6 +98,8 @@ trap_init(void)
   SETGATE(idt[13], 0, GD_KT, th13, 0);
   SETGATE(idt[14], 0, GD_KT, th14, 0);
   SETGATE(idt[16], 0, GD_KT, th16, 0);
+	SETGATE(idt[48], 0, GD_KT, th48, 0);
+	SETGATE(idt[48], 0, GD_KT, th48, 3);
 	// Per-CPU setup 
 	trap_init_percpu();
 }
@@ -174,16 +178,25 @@ trap_dispatch(struct Trapframe *tf)
 	// Handle processor exceptions.
 	// LAB 3: Your code here.
 	uint32_t fault_va;
-	if(tf->tf_trapno >= 0 && tf->tf_trapno < 32)
+	if(tf->tf_trapno >= 0 && tf->tf_trapno < 255)
 	{
 		switch(tf->tf_trapno)
 		{
 			case T_PGFLT://page fault
 				page_fault_handler(tf);
-				break;
+				return;
 			case T_BRKPT:
 				monitor(tf);
-				break;
+				return;
+			case T_SYSCALL:
+	/*			fault_va = rcr2();
+	cprintf("[%08x] user fault va %08x ip %08x\n",
+		curenv->env_id, fault_va, tf->tf_eip);
+		*/		
+				print_trapframe(tf);
+				tf->tf_regs.reg_eax = syscall(tf->tf_regs.reg_eax, tf->tf_regs.reg_edx, tf->tf_regs.reg_ecx,tf->tf_regs.reg_ebx, tf->tf_regs.reg_edi, tf->tf_regs.reg_esi);
+				
+				return;
 		}
 	}
 	// Unexpected trap: The user process or the kernel has a bug.
@@ -246,6 +259,8 @@ page_fault_handler(struct Trapframe *tf)
 	// Handle kernel-mode page faults.
 
 	// LAB 3: Your code here.
+  	if ((tf->tf_cs&3) == 0)
+		panic("Kernel page fault!");
 
 	// We've already handled kernel-mode exceptions, so if we get here,
 	// the page fault happened in user mode.

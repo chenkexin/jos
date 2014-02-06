@@ -178,7 +178,7 @@ mem_init(void)
 	// or page_insert
 	page_init();
 	check_page_free_list(1);
-	check_page_alloc();
+  check_page_alloc();
 	check_page();
 
 	//////////////////////////////////////////////////////////////////////
@@ -225,7 +225,7 @@ mem_init(void)
 	boot_map_region (kern_pgdir, (uintptr_t) KERNBASE, (uint32_t) (0xffffffff - KERNBASE), (physaddr_t) (0),PTE_W);
 
 	// Check that the initial page directory has been set up correctly.
-	check_kern_pgdir();
+  check_kern_pgdir();
 
 	// Switch from the minimal entry page directory to the full kern_pgdir
 	// page table we just created.	Our instruction pointer should be
@@ -236,7 +236,7 @@ mem_init(void)
 	// kern_pgdir wrong.
 	lcr3(PADDR(kern_pgdir));
 
-	check_page_free_list(0);
+check_page_free_list(0);
 
 	// entry.S set the really important flags in cr0 (including enabling
 	// paging).  Here we configure the rest of the flags that we care about.
