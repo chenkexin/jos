@@ -328,11 +328,11 @@ page_init(void)
     uintptr_t temp_boot_alloc = (uintptr_t)boot_alloc(0);
     //because this is physical address.
     physaddr_t temp_addr = (physaddr_t)(temp_boot_alloc - KERNBASE);
-    if( (temp_physaddr >0 && temp_physaddr < IOPHYSMEM) || temp_physaddr >= temp_addr )
+		if( (temp_physaddr > 0 && temp_physaddr < MPENTRY_PADDR) || temp_physaddr >= temp_addr)
 		{
-		pages[i].pp_ref = 0;
-		pages[i].pp_link = page_free_list;
-		page_free_list = &pages[i];
+			pages[i].pp_ref = 0;
+			pages[i].pp_link = page_free_list;
+			page_free_list = &pages[i];
 		}
 		else
 		{
@@ -340,6 +340,14 @@ page_init(void)
 			pages[i].pp_link = NULL;
 		}
 	}
+	
+ /* //setting MPENTRY_PADDR
+	for (i = 1; i < MPENTRY_PADDR/PGSIZE; i++)
+  {
+		pages[i].pp_ref = 0;
+		pages[i].pp_link = page_free_list;
+		page_free_list = &pages[i];
+	}*/
 }
 
 //
@@ -631,11 +639,11 @@ mmio_map_region(physaddr_t pa, size_t size)
 	// Hint: The staff solution uses boot_map_region.
 	//
 	// Your code here:
-  uint32_t begin = (uint32_t) ROUNDEUP((void*)base, PGSIZE);
+  uint32_t begin = (uint32_t) ROUNDUP((void*)base, PGSIZE);
 	uint32_t pa_begin = (uint32_t) ROUNDDOWN((void*)pa, PGSIZE);
 	if( begin + size > MMIOLIM )
 		 panic("mmio_map_region: out of MMIOLIM");	
-	boot_map_region( kern_pgdir, begin, size, pa, PTE_W|PTE_PCD|PTE_PET );
+	boot_map_region( kern_pgdir, begin, size, pa, PTE_W|PTE_PCD|PTE_PWT );
 	base += size;
 	return (void*)(base - size);
 //=======
