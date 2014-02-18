@@ -631,7 +631,13 @@ mmio_map_region(physaddr_t pa, size_t size)
 	// Hint: The staff solution uses boot_map_region.
 	//
 	// Your code here:
-	panic("mmio_map_region not implemented");
+  uint32_t begin = (uint32_t) ROUNDEUP((void*)base, PGSIZE);
+	uint32_t pa_begin = (uint32_t) ROUNDDOWN((void*)pa, PGSIZE);
+	if( begin + size > MMIOLIM )
+		 panic("mmio_map_region: out of MMIOLIM");	
+	boot_map_region( kern_pgdir, begin, size, pa, PTE_W|PTE_PCD|PTE_PET );
+	base += size;
+	return (void*)(base - size);
 //=======
 	// For now, there is only one address space, so always invalidate.
 	
