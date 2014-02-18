@@ -65,6 +65,7 @@
  /*
  * Lab 3: Your code here for _alltraps
  */
+/* why directly mov? */
 _alltraps:
     pushl %ds
     pushl %es
