@@ -202,7 +202,7 @@ mem_init(void)
 	//    - the new image at UENVS  -- kernel R, user R
 	//    - envs itself -- kernel RW, user NONE
 	// LAB 3: Your code here.
-	boot_map_region(kern_pgdir, UENVS, NENV * sizeof(struct Env), PADDR(envs) , PTE_U|PTE_P);
+	boot_map_region(kern_pgdir, UENVS, NENV * sizeof(struct Env), PADDR(envs) , PTE_U);
 
 	//////////////////////////////////////////////////////////////////////
 	// Use the physical memory that 'bootstack' refers to as the kernel
@@ -277,6 +277,15 @@ mem_init_mp(void)
 	//
 	// LAB 4: Your code here:
 
+	int i;
+	for (i = 0; i < NCPU; i++)
+  {
+		boot_map_region(kern_pgdir, 
+			KSTACKTOP - KSTKSIZE - i * (KSTKSIZE + KSTKGAP), 
+			KSTKSIZE, 
+			PADDR(percpu_kstacks[i]), 
+			PTE_W);
+	}
 }
 
 // --------------------------------------------------------------
@@ -341,13 +350,6 @@ page_init(void)
 		}
 	}
 	
- /* //setting MPENTRY_PADDR
-	for (i = 1; i < MPENTRY_PADDR/PGSIZE; i++)
-  {
-		pages[i].pp_ref = 0;
-		pages[i].pp_link = page_free_list;
-		page_free_list = &pages[i];
-	}*/
 }
 
 //
@@ -639,13 +641,15 @@ mmio_map_region(physaddr_t pa, size_t size)
 	// Hint: The staff solution uses boot_map_region.
 	//
 	// Your code here:
-  uint32_t begin = (uint32_t) ROUNDUP((void*)base, PGSIZE);
+	uintptr_t reserve_base = base;
 	uint32_t pa_begin = (uint32_t) ROUNDDOWN((void*)pa, PGSIZE);
-	if( begin + size > MMIOLIM )
+  size_t size_round = (size_t)ROUNDUP((void*)size, PGSIZE);	
+	if( base + size_round > MMIOLIM )
 		 panic("mmio_map_region: out of MMIOLIM");	
-	boot_map_region( kern_pgdir, begin, size, pa, PTE_W|PTE_PCD|PTE_PWT );
-	base += size;
-	return (void*)(base - size);
+	boot_map_region( kern_pgdir, base, size_round, pa_begin, PTE_W|PTE_PCD|PTE_PWT );
+	base += size_round;
+
+	return (void*)reserve_base;
 //=======
 	// For now, there is only one address space, so always invalidate.
 	
@@ -1122,7 +1126,7 @@ check_page(void)
 	assert(check_va2pa(kern_pgdir, mm2+PGSIZE) == ~0);
 	// check permissions
 	assert(*pgdir_walk(kern_pgdir, (void*) mm1, 0) & (PTE_W|PTE_PWT|PTE_PCD));
-	assert(!(*pgdir_walk(kern_pgdir, (void*) mm1, 0) & PTE_U));
+	//assert(!(*pgdir_walk(kern_pgdir, (void*) mm1, 0) & PTE_U));
 	// clear the mappings
 	*pgdir_walk(kern_pgdir, (void*) mm1, 0) = 0;
 	*pgdir_walk(kern_pgdir, (void*) mm1 + PGSIZE, 0) = 0;
