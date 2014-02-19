@@ -30,21 +30,23 @@ sched_yield(void)
 
 	// LAB 4: Your code here.
 	idle = envs;
+	int32_t cur_envid = 0;
   if(curenv)	
-		envid_t cur_envid = curenv->env_id;
-
-	//first check other envs	
-  int i = 1;
+		cur_envid = ENVX(curenv->env_id);
+	
+  //first check other envs	
+  int i = 0;
 	for( i; i < NENV; i++)
 	{
+		//cprintf("cur_envid: %d\n", cur_envid);
 		int count = (cur_envid + i) % NENV;
-		if( envs[count].env_status == ENV_RUNNABLE )
+  	if( envs[count].env_status == ENV_RUNNABLE )
 			env_run(envs + count);
 	}	
-
 	//and check the curenv, if this is not running, then halt.	
 	if( envs[cur_envid].env_status == ENV_RUNNING && curenv)
 		env_run(curenv);	
+
 	// sched_halt never returns
 	sched_halt();
 }

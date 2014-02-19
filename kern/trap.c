@@ -207,7 +207,29 @@ trap_dispatch(struct Trapframe *tf)
 {
 	// Handle processor exceptions.
 	// LAB 3: Your code here.
-//<<<<<<< HEAD
+	uint32_t fault_va;
+	if(tf->tf_trapno >= 0 && tf->tf_trapno < 255)
+	{
+		switch(tf->tf_trapno)
+		{
+			case T_PGFLT://page fault
+				page_fault_handler(tf);
+				return;
+			case T_BRKPT:
+				monitor(tf);
+				return;
+			case T_SYSCALL:
+	
+			//fault_va = rcr2();
+			//cprintf("[%08x] user fault va %08x ip %08x\n",curenv->env_id, fault_va, tf->tf_eip);
+			
+			//cprintf("T_SYSCALL\n");
+//				print_trapframe(tf);
+				tf->tf_regs.reg_eax = syscall(tf->tf_regs.reg_eax, tf->tf_regs.reg_edx, tf->tf_regs.reg_ecx,tf->tf_regs.reg_ebx, tf->tf_regs.reg_edi, tf->tf_regs.reg_esi);
+				
+				return;
+		}
+	}
 
 	// Handle spurious interrupts
 	// The hardware sometimes raises these because of noise on the
@@ -222,36 +244,8 @@ trap_dispatch(struct Trapframe *tf)
 	// interrupt using lapic_eoi() before calling the scheduler!
 	// LAB 4: Your code here.
 
-/*=======
-	uint32_t fault_va;
-	if(tf->tf_trapno >= 0 && tf->tf_trapno < 255)
-	{
-		switch(tf->tf_trapno)
-		{
-			case T_PGFLT://page fault
-				page_fault_handler(tf);
-				return;
-			case T_BRKPT:
-				monitor(tf);
-				return;
-			case T_SYSCALL:
-*/
-	
-/*			fault_va = rcr2();
-	cprintf("[%08x] user fault va %08x ip %08x\n",
-		curenv->env_id, fault_va, tf->tf_eip);
-		*/		
-
-/*				print_trapframe(tf);
-				tf->tf_regs.reg_eax = syscall(tf->tf_regs.reg_eax, tf->tf_regs.reg_edx, tf->tf_regs.reg_ecx,tf->tf_regs.reg_ebx, tf->tf_regs.reg_edi, tf->tf_regs.reg_esi);
-				
-				return;
-		}
-	}
->>>>>>> lab3
-	*/
   // Unexpected trap: The user process or the kernel has a bug.
-	print_trapframe(tf);
+//	print_trapframe(tf);
 	if (tf->tf_cs == GD_KT)
 		panic("unhandled trap in kernel");
 	else {

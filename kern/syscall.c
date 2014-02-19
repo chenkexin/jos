@@ -287,6 +287,10 @@ syscall(uint32_t syscallno, uint32_t a1, uint32_t a2, uint32_t a3, uint32_t a4, 
             sys_env_destroy(a1);
             ret = 0;
             break;
+				case SYS_yield:
+						cprintf("sys_yield\n");
+						sys_yield();
+						ret = 0;
         default:
             ret = -E_INVAL;
     }
