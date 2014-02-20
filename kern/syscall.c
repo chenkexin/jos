@@ -84,8 +84,6 @@ sys_exofork(void)
 	// will appear to return 0.
 
 	// LAB 4: Your code here.
-//	panic("sys_exofork not implemented");
-
   struct Env *e;
 	int ret = env_alloc(&e, curenv->env_id);
 	//env_alloc returns 0 on success, TRUE is not 0, so return the error return value.
@@ -94,7 +92,7 @@ sys_exofork(void)
 	e->env_status = ENV_NOT_RUNNABLE;
 	//why set eax = 0?
 	e->env_tf.tf_regs.reg_eax = 0;
-	//cprintf("e pgdir: %x\n", e, e->env_pgdir);
+	cprintf("e pgdir: %x\n", e, e->env_pgdir);
 
 	return e->env_id;
 }
@@ -175,12 +173,12 @@ sys_page_alloc(envid_t envid, void *va, int perm)
 	if(p)
 	{
 		struct Env* e;
-		int ret = envid2env(envid, &e, 0);
+		int ret = envid2env(envid, &e, 1);
 		if(ret) return ret;
 
 		//check va and perm
 		//check if va is page-aligned?
-		if( va >= (void*)UTOP || va % PGSIZE != 0 )
+		if( va >= (void*)UTOP || ROUNDDOWN(va, PGSIZE) != va )
 			return -E_INVAL;
 		if( !(perm & (PTE_U|PTE_P)))
 			return -E_INVAL;
@@ -242,14 +240,16 @@ sys_page_map(envid_t srcenvid, void *srcva,
 	if( ROUNDDOWN(dstva, PGSIZE) != dstva ) return -E_INVAL;
 	
 	//check permission
-	if( perm & PTE_W) return -E_INVAl;
+	/*if( perm & PTE_W) return -E_INVAL;
 	if( !(perm &(PTE_P|PTE_U))) return -E_INVAL;
-	if(page)
+	*/
+  if(page)
 	{
-		int ret3 = page_insert( de->env_pgdir, page, destva, perm );
+		int ret3 = page_insert( de->env_pgdir, page, dstva, perm );
 		if(ret3) return ret3;
 	}
 	else return -E_NO_MEM;
+	return 0;
 }
 
 // Unmap the page of memory at 'va' in the address space of 'envid'.
@@ -363,10 +363,28 @@ syscall(uint32_t syscallno, uint32_t a1, uint32_t a2, uint32_t a3, uint32_t a4, 
             ret = 0;
             break;
 				case SYS_yield:
-						cprintf("sys_yield\n");
 						sys_yield();
 						ret = 0;
-        default:
+						break;
+        case SYS_exofork:
+						ret = sys_exofork();
+						break;
+				case SYS_env_set_status:
+						ret = sys_env_set_status((envid_t)a1, (int)a2);
+						break;
+				case SYS_env_set_pgfault_upcall:
+						ret = sys_env_set_pgfault_upcall((envid_t)a1, (void*)a2);
+						break;
+				case SYS_page_map:
+						ret = sys_page_map((envid_t)a1, (void*)a2, (envid_t)a3, (void*)a4, (int)a5 );
+						break;
+				case SYS_page_unmap:
+						ret = sys_page_unmap((envid_t)a1, (void*)a2);
+						break;
+				case SYS_page_alloc:
+						ret = sys_page_alloc((envid_t)a1, (void*)a2, (int)a3);
+						break;
+				default:
             ret = -E_INVAL;
     }
     return ret;
