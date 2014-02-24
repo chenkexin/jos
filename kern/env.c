@@ -226,6 +226,7 @@ env_alloc(struct Env **newenv_store, envid_t parent_id)
 		generation = 1 << ENVGENSHIFT;
 	e->env_id = generation | (e - envs);
 
+	cprintf("\n the e-->envid: %d\n", e->env_id);
 	// Set the basic status variables.
 	e->env_parent_id = parent_id;
 	e->env_type = ENV_TYPE_USER;
@@ -255,6 +256,7 @@ env_alloc(struct Env **newenv_store, envid_t parent_id)
 
 	// Enable interrupts while in user mode.
 	// LAB 4: Your code here.
+	e->env_tf.tf_eflags = FL_IF | 3;
 
 	// Clear the page fault handler until user installs one.
 	e->env_pgfault_upcall = 0;
