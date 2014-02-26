@@ -52,8 +52,11 @@ dumbfork(void)
 	// will return 0 instead of the envid of the child.
 	envid = sys_exofork();
 	if (envid < 0)
+	{
 		panic("sys_exofork: %e", envid);
+	}
 	if (envid == 0) {
+	
 		// We're the child.
 		// The copied value of the global variable 'thisenv'
 		// is no longer valid (it refers to the parent!).
@@ -74,7 +77,7 @@ dumbfork(void)
 	// Start the child environment running
 	if ((r = sys_env_set_status(envid, ENV_RUNNABLE)) < 0)
 		panic("sys_env_set_status: %e", r);
-
+	//cprintf("change the env's status\n");
 	return envid;
 }
 

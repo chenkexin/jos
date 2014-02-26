@@ -685,8 +685,10 @@ user_mem_check(struct Env *env, const void *va, size_t len, int perm)
 	{}
 	else return -E_FAULT;	
   */
-    cprintf("user_mem_check va: %x, len: %x\n", va, len);
-    uint32_t begin = (uint32_t) ROUNDDOWN(va, PGSIZE); 
+    //cprintf("user_mem_check va: %x, len: %x\n", va, len);
+  //recursively printed user_mem_check
+	//so delete the line and to see  
+	uint32_t begin = (uint32_t) ROUNDDOWN(va, PGSIZE); 
     uint32_t end = (uint32_t) ROUNDUP(va+len, PGSIZE);
     uint32_t i;
     for (i = (uint32_t)begin; i < end; i+=PGSIZE) 
@@ -699,7 +701,7 @@ user_mem_check(struct Env *env, const void *va, size_t len, int perm)
          return -E_FAULT;
      }
    }
-   cprintf("user_mem_check success va: %x, len: %x\n", va, len);
+   //cprintf("user_mem_check success va: %x, len: %x\n", va, len);
    return 0;
 
 }
@@ -714,7 +716,8 @@ user_mem_check(struct Env *env, const void *va, size_t len, int perm)
 void
 user_mem_assert(struct Env *env, const void *va, size_t len, int perm)
 {
-	if (user_mem_check(env, va, len, perm | PTE_U) < 0) {
+	if (user_mem_check(env, va, len, perm | PTE_U) < 0)
+  {
 		cprintf("[%08x] user_mem_check assertion failure for "
 			"va %08x\n", env->env_id, user_mem_check_addr);
 		env_destroy(env);	// may not return
