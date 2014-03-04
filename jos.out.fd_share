@@ -11,20 +11,45 @@ SMP: CPU 0 found 1 CPU(s)
 enabled interrupts: 1 2 4
 
  the e-->envid: 4096
-p_memsz: a40d, p_filesz: a40d
-p_memsz: 34ad, p_filesz: 34ad
+p_memsz: a426, p_filesz: a426
+p_memsz: 3554, p_filesz: 3554
 p_memsz: 7000, p_filesz: 4098
 
  the e-->envid: 4097
 p_memsz: 10, p_filesz: 10
-p_memsz: 2f83, p_filesz: 2f83
+p_memsz: 300b, p_filesz: 300b
 p_memsz: 3004, p_filesz: 58
 FS is running
 FS can do I/O
 Device 1 presence: 1
 superblock is good
-No runnable environments in the system!
+in open: at very beginning
+4
+
+ the e-->envid: 4098
+e pgdir: f026c0f8
+case SYS_env_set_status
+setting the status
+[00001002] user panic in <unknown> at user/testfdsharing.c:33: read in parent got 4098, then got 0
 Welcome to the JOS kernel monitor!
 Type 'help' for a list of commands.
+TRAP frame at 0xf026c0f8 from CPU 0
+  edi  0x00001002
+  esi  0x00802a33
+  ebp  0xeebfdf90
+  oesp 0xefffffdc
+  ebx  0xeebfdfa4
+  edx  0xeebfde38
+  ecx  0x00000001
+  eax  0x00000001
+  es   0x----0023
+  ds   0x----0023
+  trap 0x00000003 Breakpoint
+  err  0x00000000
+  eip  0x008002dc
+  cs   0x----001b
+  flag 0x00000292
+  esp  0xeebfdf68
+  ss   0x----0023
 K> 
 QEMU: Terminated via GDBstub

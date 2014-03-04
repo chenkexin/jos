@@ -11,21 +11,77 @@ SMP: CPU 0 found 1 CPU(s)
 enabled interrupts: 1 2 4
 
  the e-->envid: 4096
-p_memsz: a40d, p_filesz: a40d
-p_memsz: 34ad, p_filesz: 34ad
+p_memsz: a426, p_filesz: a426
+p_memsz: 3554, p_filesz: 3554
 p_memsz: 7000, p_filesz: 4098
 
  the e-->envid: 4097
 p_memsz: 10, p_filesz: 10
-p_memsz: 355f, p_filesz: 355f
+p_memsz: 372f, p_filesz: 372f
 p_memsz: 3004, p_filesz: 60
-
- the e-->envid: 4098
-e pgdir: f026a0f8
 FS is running
 FS can do I/O
 Device 1 presence: 1
 superblock is good
-fork handles PTE_SHARE wrong
 
+ the e-->envid: 4098
+e pgdir: f026c0f8
+case SYS_env_set_status
+setting the status
+fork handles PTE_SHARE wrong
+in spawnl: ready to call spawn
+in spawn: at very beginning
+in open: at very beginning
+4
+ij/n spawn: after open, ret is 0
+in spawn: after read elf
+
+ the e-->envid: 4099
+e pgdir: f026c174
+in spawn: after sys_exofork
+in spawn:
+case SYS_env_set_status
+setting the status
+[00001003] user fault va a0000000 ip 008009aa
+TRAP frame at 0xf026c174 from CPU 0
+  edi  0x00000000
+  esi  0xeebfdfe0
+  ebp  0xeebfdf70
+  oesp 0xefffffdc
+  ebx  0x00000067
+  edx  0xa0000000
+  ecx  0x00802fe6
+  eax  0xa0000000
+  es   0x----0023
+  ds   0x----0023
+  trap 0x0000000e Page Fault
+  cr2  0xa0000000
+  err  0x00000006 [user, write, not-present]
+  eip  0x008009aa
+  cs   0x----001b
+  flag 0x00000296
+  esp  0xeebfdf6c
+  ss   0x----0023
+spawn handles PTE_SHARE wrong
+Welcome to the JOS kernel monitor!
+Type 'help' for a list of commands.
+TRAP frame at 0xf026c0f8 from CPU 0
+  edi  0x00000000
+  esi  0x00001002
+  ebp  0xeebfdfd0
+  oesp 0xefffffdc
+  ebx  0x00000000
+  edx  0xeebfde88
+  ecx  0x0000001e
+  eax  0x0000001e
+  es   0x----0023
+  ds   0x----0023
+  trap 0x00000003 Breakpoint
+  err  0x00000000
+  eip  0x008001b2
+  cs   0x----001b
+  flag 0x00000292
+  esp  0xeebfdfb8
+  ss   0x----0023
+K> 
 QEMU: Terminated via GDBstub

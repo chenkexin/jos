@@ -87,7 +87,7 @@ spawn(const char *prog, const char **argv)
 
 	cprintf("in spawn: at very beginning\n");
 	r = open(prog, O_RDONLY);
-	cprintf("in spawn: after open, ret is %d\n", r);
+	cprintf("ij/n spawn: after open, ret is %d\n", r);
 	
 	if ((r < 0))
 	{
@@ -311,6 +311,21 @@ static int
 copy_shared_pages(envid_t child)
 {
 	// LAB 5: Your code here.
-	return 0;
+  int r;
+  int pdeno, pteno;
+  uint32_t pn = 0;
+
+    for (pteno = 0; pteno < NPTENTRIES; pteno++,pn++)
+		 {
+      int perm = uvpt[pn];
+      if (perm & PTE_SHARE)
+			 {
+        void *addr = (void *)(pn << PGSHIFT);
+        r = sys_page_map(0, addr, child, addr, perm);
+      //  if (r)
+    //      return r;
+        }
+    }
+  return 0;
 }
 

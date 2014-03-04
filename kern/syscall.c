@@ -338,10 +338,10 @@ static int
 sys_ipc_try_send(envid_t envid, uint32_t value, void *srcva, unsigned perm)
 {
 	// LAB 4: Your code here.
-   /* struct Env *e;
+    struct Env *e;
     int ret = envid2env(envid, &e, 0);
     if(ret)
-			 return ret;//bad env
+			 return ret;
     if(!e->env_ipc_recving) 
 			return -E_IPC_NOT_RECV;
     if(srcva < (void*)UTOP) 
@@ -349,7 +349,7 @@ sys_ipc_try_send(envid_t envid, uint32_t value, void *srcva, unsigned perm)
         pte_t *pte;
         struct PageInfo *pg = page_lookup(curenv->env_pgdir, srcva, &pte);
         if (!pg) return -E_INVAL;
-        if ((*pte & perm) != perm) return -E_INVAL;
+        //if ((*pte & perm) != perm) return -E_INVAL;
         if ((perm & PTE_W) && !(*pte & PTE_W)) return -E_INVAL;
         if (srcva != ROUNDDOWN(srcva, PGSIZE)) return -E_INVAL;
         if (e->env_ipc_dstva < (void*)UTOP)
@@ -364,8 +364,8 @@ sys_ipc_try_send(envid_t envid, uint32_t value, void *srcva, unsigned perm)
     e->env_ipc_value = value; 
     e->env_status = ENV_RUNNABLE;
     e->env_tf.tf_regs.reg_eax = 0;
-    return 0;*/
-
+    return 0;
+/*
 struct Env *e;
 	struct PageInfo *page;
 	pte_t *pte;
@@ -408,6 +408,7 @@ struct Env *e;
 
 	e->env_status = ENV_RUNNABLE;
 	return 0;
+*/
 //	panic("sys_ipc_try_send not implemented");
 }
 
