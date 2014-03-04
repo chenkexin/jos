@@ -1,0 +1,57 @@
++ ld obj/kern/kernel
++ mk obj/kern/kernel.img
+Could not open option rom 'sgabios.bin': No such file or directory
+6828 decimal is 15254 octal!
+Physical memory: 66556K available, base = 640K, extended = 65532K
+check_page_alloc() succeeded!
+check_page() succeeded!
+check_kern_pgdir() succeeded!
+check_page_installed_pgdir() succeeded!
+[00000000] new env 00001000
+p_memsz: 3e4a, p_filesz: 3e4a
+p_memsz: 1240, p_filesz: 1240
+p_memsz: 8, p_filesz: 4
+Incoming TRAP frame at 0xefffffbc
+TRAP frame at 0xf01a1000
+  edi  0x00000000
+  esi  0x00000000
+  ebp  0xeebfdfd0
+  oesp 0xefffffdc
+  ebx  0x00000000
+  edx  0x00000000
+  ecx  0x00000000
+  eax  0x00000002
+  es   0x----0023
+  ds   0x----0023
+  trap 0x00000030 System call
+  err  0x00000000
+  eip  0x00800197
+  cs   0x----001b
+  flag 0x00000092
+  esp  0xeebfdfc4
+  ss   0x----0023
+Incoming TRAP frame at 0xefffffbc
+TRAP frame at 0xf01a1000
+  edi  0x00000000
+  esi  0x00000000
+  ebp  0xeebfdfb0
+  oesp 0xefffffdc
+  ebx  0x00000000
+  edx  0x00000001
+  ecx  0x00000001
+  eax  0x00000000
+  es   0x----0023
+  ds   0x----0023
+  trap 0x00000030 System call
+  err  0x00000000
+  eip  0x008000da
+  cs   0x----001b
+  flag 0x00000092
+  esp  0xeebfdfa4
+  ss   0x----0023
+Incoming TRAP frame at 0xeffffe6c
+kernel panic at kern/trap.c:263: Kernel page fault!
+Welcome to the JOS kernel monitor!
+Type 'help' for a list of commands.
+
+QEMU: Terminated via GDBstub
